@@ -1,14 +1,6 @@
 #include "cmplx.h"
 #include <math.h>
 
-/** We will primarily be focusing on multiplying complex numbers as opposed to adding...(?)
- * So optimizing for complex multiplication will be best.
-*/
-struct _complex {
-    float magnitude;
-    float argument;
-};
-
 /** Return complex number constructed via rectangular form. */
 complex cmplx_rect(float real, float imag) {
     complex a;

@@ -4,10 +4,16 @@
 /** Represent a complex number with a real and an imaginary component. */
 typedef struct _complex complex;
 
-/** Return complex number constructed via rectangular form. */
+/** 
+ * Return complex number constructed via rectangular form. 
+ * Z = real + i * imag
+ */
 complex cmplx_rect(float real, float imag);
 
-/** Return complex number constructed via polar form. */
+/** 
+ * Return complex number constructed via polar form. 
+ * Z = magnitude * exp(i * argument)
+ * */
 complex cmplx_polar(float magnitude, float argument);
 
 /** Return real component of complex number A. */
@@ -54,5 +60,32 @@ complex cmplx_div(complex a, complex b);
  * Compute (A^k)
 */
 complex cmplx_pow(complex a, float k);
+
+/**
+ * Scale complex number A by the constant N.
+*/
+complex cmplx_scale(complex a, float n);
+
+/**
+ * Return Nth root of unity.
+ * Z = exp(-2 * pi * i / N)
+*/
+complex nth_root_unity(int n);
+
+/**
+ * Return Nth root of unity raised to a power.
+ * omega = nth_root_unity(n)
+ * Z = omega^k
+*/
+complex nth_root_unity_pow(int n, int k);
+
+/** We will primarily be focusing on multiplying complex numbers as opposed to adding...(?)
+ * So optimizing for complex multiplication will be best.
+*/
+struct _complex {
+    float magnitude;
+    float argument;
+};
+
 
 #endif
