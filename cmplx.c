@@ -2,7 +2,7 @@
 #include <math.h>
 
 /** We will primarily be focusing on multiplying complex numbers as opposed to adding...(?)
- * So optimizing for complex multiplication at the moment.
+ * So optimizing for complex multiplication will be best.
 */
 struct _complex {
     float magnitude;
