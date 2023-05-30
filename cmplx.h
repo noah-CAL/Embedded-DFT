@@ -87,6 +87,15 @@ complex nth_root_unity(int n);
 complex nth_root_unity_pow(int n, int k);
 
 /**
+ * Return result of a complex inner product guaranteed to satisfy
+ * 1. Additivity
+ * 2. Conjugate Symmetry
+ * 3. Positive definiteness
+ * for two N-length complex vectors
+*/
+complex cmplx_inner_product(complex *v, complex *w, uint32_t N);
+
+/**
  * Perform complex matrix-vector multiplication 
  * with dimensions NxN and N and returning the
  * norm of each resulting element.

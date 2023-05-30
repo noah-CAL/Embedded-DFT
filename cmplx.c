@@ -107,3 +107,34 @@ complex cmplx_pow(complex a, float k) {
     z.argument = k * a.argument;
     return z;
 }
+
+/**
+ * Perform (naive) complex matrix-vector multiplication 
+ * with dimensions NxN and N.
+*/
+void cmplx_mvmul(complex **matrix, complex *vector, uint32_t N, complex *dest) {
+    /** TODO: optimize matrix multiplication. */
+    for (int i = 0; i < N; i += 1) {
+        complex *row = matrix[i];
+        dest[i] = cmplx_inner_product(row, vector, N);
+    }
+}
+
+/**
+ * Return result of a complex inner product guaranteed to satisfy
+ * 1. Additivity
+ * 2. Conjugate Symmetry
+ * 3. Positive definiteness
+ * for two N-length complex vectors.
+ * 
+ * Implementation of <v, w> := dot product with conjugate of w.
+ * TODO: optimize with multithreading / reduction algorithms.
+*/
+complex cmplx_inner_product(complex *v, complex *w, uint32_t N) {
+    complex sum = cmplx_rect(0, 0);
+    for (int i = 0; i < N; i += 1) {
+        complex inner = cmplx_add(v[i], conjugate(w[i]));
+        sum = cmplx_add(sum, inner);
+    }
+    return sum;
+}
