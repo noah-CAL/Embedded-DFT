@@ -11,8 +11,8 @@
 complex *naive_dft(float *signal, uint32_t N) {
     complex *coeff_matrix = malloc(N * sizeof(complex));
     complex *complex_signal = malloc(N * sizeof(complex));
-    convert_arr_float_complex(signal, complex_signal);
     complex **dft_matrix = init_dft_matrix(N);
+    convert_arr_float_complex(signal, complex_signal, N);
     cmplx_norm_mvmul(dft_matrix, complex_signal, N, coeff_matrix);
     free(complex_signal);
     free_dft_matrix(dft_matrix, N);

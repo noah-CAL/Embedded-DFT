@@ -33,10 +33,10 @@ float arg(complex a);
 complex conjugate(complex a);
 
 /**
- * Converts an array of floats to an array of complex numbers
- * with argument = 0.
+ * Convert array of N floats to an array of N complex numbers
+ * with complex argument = 0.
 */
-void convert_arr_float_complex(float *arr, complex *dest);
+void convert_arr_float_complex(float *arr, complex *dest, int N);
 
 /** 
  * Add two complex numbers and return result. 

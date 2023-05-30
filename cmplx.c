@@ -45,6 +45,16 @@ complex conjugate(complex a) {
     return b;
 }
 
+/**
+ * Convert array of N floats to an array of N complex numbers
+ * with complex argument = 0.
+*/
+void convert_arr_float_complex(float *arr, complex *dest, int N) {
+    for (int i = 0; i < N; i += 1) {
+        dest[i] = cmplx_polar(arr[i], 0);
+    }
+}
+
 /** 
  * Add two complex numbers and return result. 
  * Compute (a + b)
