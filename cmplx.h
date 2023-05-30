@@ -1,5 +1,6 @@
 #ifndef CMPLX_H
 #define CMPLX_H
+#include <stdint.h>
 
 /** Represent a complex number with a real and an imaginary component. */
 typedef struct _complex complex;
@@ -30,6 +31,12 @@ float arg(complex a);
 
 /** Return complex conjugate of number A. */
 complex conjugate(complex a);
+
+/**
+ * Converts an array of floats to an array of complex numbers
+ * with argument = 0.
+*/
+void convert_arr_float_complex(float *arr, complex *dest);
 
 /** 
  * Add two complex numbers and return result. 
@@ -78,6 +85,13 @@ complex nth_root_unity(int n);
  * Z = omega^k
 */
 complex nth_root_unity_pow(int n, int k);
+
+/**
+ * Perform complex matrix-vector multiplication 
+ * with dimensions NxN and N and returning the
+ * norm of each resulting element.
+*/
+void cmplx_norm_mvmul(complex **matrix, complex *vector, uint32_t N, complex *dest);
 
 /** We will primarily be focusing on multiplying complex numbers as opposed to adding...(?)
  * So optimizing for complex multiplication will be best.

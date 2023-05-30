@@ -8,11 +8,14 @@
  * Compute N-point DFT with DFT transformation matrix in O(N^2) time. 
  * Return DFT coefficients in N-length float array.
 */
-float *naive_dft(float *signal, uint32_t N) {
-    float *coeff_matrix = malloc(N * sizeof(float));
+complex *naive_dft(float *signal, uint32_t N) {
+    complex *coeff_matrix = malloc(N * sizeof(complex));
+    complex *complex_signal = malloc(N * sizeof(complex));
+    convert_arr_float_complex(signal, complex_signal);
     complex **dft_matrix = init_dft_matrix(N);
-    /** TODO: matrix-vector multiplication to compute result. */
-    free(dft_matrix);
+    cmplx_norm_mvmul(dft_matrix, complex_signal, N, coeff_matrix);
+    free(complex_signal);
+    free_dft_matrix(dft_matrix, N);
     return coeff_matrix;
 }
 

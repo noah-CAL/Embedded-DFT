@@ -5,7 +5,7 @@
  * Compute N-point DFT with DFT transformation matrix in O(N^2) time. 
  * Return DFT coefficients in N-length float array.
 */
-float *naive_dft(float *signal, uint32_t N);
+complex *naive_dft(float *signal, uint32_t N);
 
 /** 
  * Return normalized N-point DFT transformation matrix.
