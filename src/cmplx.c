@@ -1,5 +1,8 @@
 #include "cmplx.h"
 #include <math.h>
+#ifndef  M_PI
+#define  M_PI  3.1415926535897932384626433
+#endif
 
 /** Return complex number constructed via rectangular form. */
 complex cmplx_rect(float real, float imag) {
@@ -39,10 +42,8 @@ float arg(complex a) {
 
 /** Return complex conjugate of number A. */
 complex conjugate(complex a) {
-    complex b;
-    b.magnitude = a.magnitude;
-    b.argument = -a.argument;
-    return b;
+    a.argument *= -1;
+    return a;
 }
 
 /**
@@ -73,6 +74,14 @@ complex cmplx_sub(complex a, complex b) {
     float re = real(a) - real(b);
     float im = imag(a) - imag(b);
     return cmplx_rect(re, im);
+}
+
+/**
+ * Scale complex number A by the constant N.
+*/
+complex cmplx_scale(complex a, float n) {
+    a.magnitude *= n;
+    return a;
 }
 
 /** 
@@ -109,12 +118,40 @@ complex cmplx_pow(complex a, float k) {
 }
 
 /**
+ * Return primitive Nth root of unity.
+ * Z = exp(-2 * pi * i / N)
+*/
+complex nth_root_unity(int n) {
+    complex a;
+    a.magnitude = 1;
+    a.argument = -2 * M_PI / n;  
+    return a;
+}
+
+/**
+ * Return Nth root of unity raised to a power.
+ * omega = nth_root_unity(n)
+ * Z = omega^k
+*/
+complex nth_root_unity_pow(int n, int k) {
+    complex a = nth_root_unity(n);
+    return cmplx_pow(a, k);
+}
+
+/**
+ * Return Nth root of unity raised to a power.
+ * omega = nth_root_unity(n)
+ * Z = omega^k
+*/
+complex nth_root_unity_pow(int n, int k);
+
+/**
  * Perform (naive) complex matrix-vector multiplication 
  * with dimensions NxN and N.
 */
 void cmplx_mvmul(complex **matrix, complex *vector, uint32_t N, complex *dest) {
     /** TODO: optimize matrix multiplication. */
-    for (int i = 0; i < N; i += 1) {
+    for (uint32_t i = 0; i < N; i += 1) {
         complex *row = matrix[i];
         dest[i] = cmplx_inner_product(row, vector, N);
     }
@@ -132,7 +169,7 @@ void cmplx_mvmul(complex **matrix, complex *vector, uint32_t N, complex *dest) {
 */
 complex cmplx_inner_product(complex *v, complex *w, uint32_t N) {
     complex sum = cmplx_rect(0, 0);
-    for (int i = 0; i < N; i += 1) {
+    for (uint32_t i = 0; i < N; i += 1) {
         complex inner = cmplx_add(v[i], conjugate(w[i]));
         sum = cmplx_add(sum, inner);
     }

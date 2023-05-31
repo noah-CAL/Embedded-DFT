@@ -26,10 +26,9 @@ complex *naive_dft(float *signal, uint32_t N) {
 */
 complex **init_dft_matrix(uint32_t N) {
     complex **matrix = malloc(N * sizeof(complex *));
-    for (int i = 0; i < N; i += 1) {
+    for (uint32_t i = 0; i < N; i += 1) {
         complex *row = malloc(N * sizeof(complex));
-        for (int j = 0; j < N; j += 1) {
-            int k = i * j;
+        for (uint32_t j = 0; j < N; j += 1) {
             complex primitive = nth_root_unity_pow(N, i * j);
             row[j] = cmplx_scale(primitive, 1 / sqrt(N));
         }
@@ -40,7 +39,7 @@ complex **init_dft_matrix(uint32_t N) {
 
 /** Frees memory allocated to store N-point DFT matrix. */
 void free_dft_matrix(complex **dft_matrix, uint32_t N) {
-    for (int i = 0; i < N; i += 1) {
+    for (uint32_t i = 0; i < N; i += 1) {
         free(dft_matrix[i]);
     }
     free(dft_matrix);

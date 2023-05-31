@@ -50,6 +50,11 @@ complex cmplx_add(complex a, complex b);
 */
 complex cmplx_sub(complex a, complex b);
 
+/**
+ * Scale complex number A by the constant N.
+*/
+complex cmplx_scale(complex a, float n);
+
 /** 
  * Multiply two complex numbers and return result. 
  * Compute (a * b)
@@ -69,12 +74,7 @@ complex cmplx_div(complex a, complex b);
 complex cmplx_pow(complex a, float k);
 
 /**
- * Scale complex number A by the constant N.
-*/
-complex cmplx_scale(complex a, float n);
-
-/**
- * Return Nth root of unity.
+ * Return primitive Nth root of unity.
  * Z = exp(-2 * pi * i / N)
 */
 complex nth_root_unity(int n);

@@ -1,5 +1,8 @@
 CC := gcc
 CFLAGS := -Wall -Wextra -Werror -std=c99
+LDLIBS := -lm
+
+# Directories
 SRC_DIR := src
 TEST_DIR := tests
 BUILD_DIR := build
@@ -24,22 +27,22 @@ all: $(PROGRAM) $(TEST_EXECUTABLES)
 # Build rule for source files
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(BUILD_DIR)
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@ $(LDLIBS) 
 
 # Build rule for test files
 $(BUILD_DIR)/%.o: $(TEST_DIR)/%.c
 	@mkdir -p $(BUILD_DIR)
-	$(CC) $(CFLAGS) -I$(SRC_DIR) -c $< -o $@
+	$(CC) $(CFLAGS) -I$(SRC_DIR) -c $< -o $@ $(LDLIBS)
 
 # Build and run test executables
 $(BUILD_DIR)/%: $(BUILD_DIR)/%.o $(OBJS)
-	$(CC) $(CFLAGS) $^ -o $@
+	$(CC) $(CFLAGS) $^ -o $@ $(LDLIBS)
 	@echo "Running $@"
 	@./$@
 
 # Build and run program executable
 $(PROGRAM): $(PROGRAM_OBJ) $(OBJS)
-	$(CC) $(CFLAGS) $^ -o $@
+	$(CC) $(CFLAGS) $^ -o $@ $(LDLIBS)
 	@echo "Running $(PROGRAM)"
 	@./$(PROGRAM)
 
