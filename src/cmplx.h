@@ -91,16 +91,15 @@ complex nth_root_unity_pow(int n, int k);
  * 1. Additivity
  * 2. Conjugate Symmetry
  * 3. Positive definiteness
- * for two N-length complex vectors
+ * for two N-length complex vectors.
 */
 complex cmplx_inner_product(complex *v, complex *w, uint32_t N);
 
 /**
  * Perform complex matrix-vector multiplication 
- * with dimensions NxN and N and returning the
- * norm of each resulting element.
+ * with dimensions NxN and N.
 */
-void cmplx_norm_mvmul(complex **matrix, complex *vector, uint32_t N, complex *dest);
+void cmplx_mvmul(complex **matrix, complex *vector, uint32_t N, complex *dest);
 
 /** We will primarily be focusing on multiplying complex numbers as opposed to adding...(?)
  * So optimizing for complex multiplication will be best.
